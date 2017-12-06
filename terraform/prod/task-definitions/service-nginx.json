@@ -1,0 +1,47 @@
+[
+  {
+    "name": "${PROJECT_NAME}",
+    "image": "${NGINX_IMAGE_URL}",
+    "cpu": 300,
+    "memory": 70,
+    "essential": true,
+    "mountPoints": [
+      {
+        "sourceVolume": "letsencrypt",
+        "containerPath": "/etc/letsencrypt"
+      },
+      {
+        "sourceVolume": "${PROJECT_NAME}",
+        "containerPath": "/var/www/html/${PROJECT_NAME}"
+      },
+      {
+        "sourceVolume": "${PROJECT_NAME}",
+        "containerPath": "/var/www/html/${PROJECT_NAME}"
+      }
+    ],
+    "hostname": "${PROJECT_NAME}-nginx",
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 80
+      },
+      {
+        "containerPort": 443,
+        "hostPort": 443
+      }
+    ],
+    "environment": [
+      {
+        "name": "DOMAINS",
+        "value": "${DOMAINS}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "fluentd",
+      "options": {
+        "fluentd-address": "${FLUENTD_ADDRESS}",
+        "tag": "${FLUENTD_TAG}"
+      }
+    }
+  }
+]
