@@ -1,0 +1,29 @@
+[
+  {
+    "name": "${PROJECT_NAME}",
+    "image": "${IMAGE_URL}",
+    "cpu": 200,
+    "memory": 200,
+    "essential": true,
+    "mountPoints": [
+      {
+        "sourceVolume": "${PROJECT_NAME}",
+        "containerPath": "/var/www/html/${PROJECT_NAME}"
+      }
+    ],
+    "hostname": "${PROJECT_NAME}",
+    "logConfiguration": {
+      "logDriver": "fluentd",
+      "options": {
+        "fluentd-address": "${FLUENTD_ADDRESS}",
+        "tag": "${FLUENTD_TAG}"
+      }
+    },
+    "portMappings": [
+      {
+        "containerPort": 9000,
+        "hostPort": 8080
+      }
+    ]
+  }
+]

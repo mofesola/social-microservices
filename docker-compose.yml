@@ -1,0 +1,27 @@
+version: '2'
+services:
+
+  social-microservices-nginx:
+      build: nginx/.
+      image: social-microservices-nginx
+      networks:
+        - social-microservices-net
+      restart: unless-stopped
+      ports:
+        - "8083:80"
+
+  social-microservices:
+      build: .
+      image: social-microservices
+      networks:
+        - social-microservices-net
+      restart: unless-stopped
+      ports:
+        - "1337:1337"
+      environment:
+        - APP_ID setYourAppId
+        - MASTER_KEY setYourMasterKey
+        - DATABASE_URI setMongoDBURI
+
+networks:
+  social-microservices-net:

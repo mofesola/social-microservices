@@ -1,0 +1,29 @@
+[
+  {
+    "name": "${PROJECT_NAME}",
+    "mountPoints": [
+      {
+        "sourceVolume": "${PROJECT_NAME}",
+        "containerPath": "/var/www/html/ppv"
+      }
+    ],
+    "image": "${image_url}",
+    "hostname": "${PROJECT_NAME}-${ENV}",
+    "cpu": 200,
+    "memory": 100,
+    "essential": true,
+    "logConfiguration": {
+      "logDriver": "fluentd",
+      "options": {
+        "fluentd-address": "${FLUENTD_ADDRESS}",
+        "tag": "${FLUENTD_TAG}"
+      }
+    },
+    "portMappings": [
+      {
+        "containerPort": 9000,
+        "hostPort": 9000
+      }
+    ]
+  }
+]
