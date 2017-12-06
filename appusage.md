@@ -29,3 +29,4 @@ Scaling will be handled by Amazon ECS based on the rules setup in the terraform 
 
 Write the travis build file
 Write the nginx docker image
+Add New Relic module within application for uptime and application performance monitoring
